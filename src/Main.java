@@ -58,7 +58,6 @@ public class Main {
         }
     }
 
-
     private static void adminOptions(){
 
         System.out.println("Options are below: ");
@@ -163,11 +162,17 @@ public class Main {
         switch(choice){
             case "a":
                 searchForItem();
-                break;
 
             case "b":
                 updateRating();
+                userOptions();
                 break;
+
+            case "c":
+                movieHall();
+                userOptions();
+                break;
+
         }
 
     }
@@ -205,7 +210,33 @@ public class Main {
         if(!dbRating.close()){
             System.out.println("Error closing DB!");
         }
+    }
 
+    private static void movieHall(){
+        System.out.println("A. Current Shows at Block Buster\nB. Current Shows at Cineplex");
+
+        String choice= SC.nextLine().toLowerCase();
+
+        DataSourceSearch dbQuery= new DataSourceSearch();
+        ArrayList<Movie> movieList;
+
+        if(!dbQuery.open()){
+            System.out.println("Error opening DB");
+        }
+
+        if(choice.equals("a") || choice.equals("b")){
+            movieList= dbQuery.showAll();
+
+            for(Movie movie : movieList){
+                System.out.println("-------------------------------------------------");
+                System.out.println("Name: "+movie.getName());
+                System.out.println("Director: "+movie.getDirector());
+                System.out.println("Release Year: "+movie.getReleaseYear());
+                System.out.println("User Rating: "+movie.getRating());
+                System.out.println("Genre: "+movie.getGenre());
+                System.out.println("-------------------------------------------------");
+            }
+        }
 
     }
 

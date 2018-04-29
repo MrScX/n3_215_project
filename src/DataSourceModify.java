@@ -79,7 +79,7 @@ public class DataSourceModify extends DataSource{
         try{
             statement= connection.createStatement();
 
-            statement.execute("UPDATE "+TABLE_MOVIE+" SET "+COL_RATING+"="+ratingBuild+","+COL_RATING_COUNT+"="++" WHERE "+COL_NAME+"="+nameBuild);
+            statement.execute("UPDATE "+TABLE_MOVIE+" SET "+COL_RATING+"="+ratingBuild+" WHERE "+COL_NAME+"="+nameBuild);
 
             COUNT_RATING++;
 
